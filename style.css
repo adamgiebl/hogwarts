@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "bluu";
+  src: url("./fonts/bluunext-bold-webfont.woff2") format("woff2"),
+    url("./fonts/bluunext-bold-webfont.woff") format("woff"),
+    url("./fonts/bluunext-bold.ttf") format("truetype"),
+    url("./fonts/bluunext-bold-webfont.svg#bluu_nextbold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "bluu";
+  src: url("./fonts/bluunext-bolditalic-webfont.woff2") format("woff2"),
+    url("./fonts/bluunext-bolditalic-webfont.woff") format("woff"),
+    url("./fonts/bluunext-bolditalic.ttf") format("truetype"),
+    url("./fonts/bluunext-bolditalic-webfont.svg#bluu_nextbold_italic")
+      format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "bluu_nexttitling";
+  src: url("./fonts/BluuNext-Titling.ttf") format("truetype"),
+    url("./fonts/bluunext-titling.woff2") format("woff2"),
+    url("./fonts/bluunext-titling.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: bluu;
+  background: #1d2d44;
+  color: #f0ebd8;
+}
+
+h1 {
+  text-align: center;
+}
+
+.italic {
+  font-style: italic;
+}
+.tilt {
+  font-family: bluu_nexttitling;
+}
+.student-table {
+  margin: auto;
+  max-width: 1000px;
+  width: 100%;
+  background: #3e5c76;
+  padding: 10px;
+}
+
+.student-table th:nth-child(odd),
+.student-table td:nth-child(odd) {
+  background: #748cab;
+}

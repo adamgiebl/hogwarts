@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Hogwarts student overview</h1>
+    <table class="student-table">
+      <thead>
+        <tr>
+          <th data-field="firstname">First name</th>
+          <th data-field="middlename">Middle name</th>
+          <th data-field="lastname">Last name</th>
+          <th data-field="house">House</th>
+          <th data-field="gender">Gender</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <template class="student-row-template">
+      <tr>
+        <td data-field="firstname"></td>
+        <td data-field="middlename"></td>
+        <td data-field="lastname"></td>
+
+        <td data-field="house"></td>
+        <td data-field="gender"></td>
+      </tr>
+    </template>
+    <script src="./scripts/script.js" type="module"></script>
+  </body>
+</html>
