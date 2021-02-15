@@ -1,0 +1,75 @@
+.table {
+  width: 100%;
+  padding: 10px;
+  border-collapse: collapse;
+  font-family: "Roboto", sans-serif;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 645px;
+}
+
+.table__header th {
+  text-align: left;
+  font-weight: 500;
+}
+
+td,
+th {
+  padding: 15px 15px;
+}
+
+.table tr:nth-child(odd):not(thead tr) {
+  background: var(--lightGrey);
+}
+
+.table tbody tr {
+  cursor: pointer;
+  background: var(--darkGrey);
+}
+.table tbody tr:hover {
+  filter: contrast(0.8);
+}
+
+.table thead tr th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.table thead tr th:hover {
+  background: var(--grey);
+  color: var(--lightGreyText);
+}
+.table thead tr th:hover svg path {
+  fill: var(--lightGreyText);
+}
+
+.table thead tr th svg {
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+}
+
+.table td:nth-child(1),
+.table th:nth-child(1) {
+  padding-left: 20px;
+}
+
+.table td {
+  color: var(--lightGreyText);
+}
+
+.anime {
+  animation: anime 0.3s ease-in-out;
+}
+
+@keyframes anime {
+  from {
+    transform: translateX(0);
+  }
+  from {
+    transform: translateX(20px);
+  }
+}

@@ -10,12 +10,12 @@ export const Student = {
   nickname: "",
   lastName: "",
   imgSrc: "",
-  house: "",
+  _house: "",
   bloodStatus: "",
   isPrefect: false,
   isExpelled: false,
   isInquisitor: false,
-  setName: function (rawFullName) {
+  set name(rawFullName) {
     rawFullName = rawFullName.trim().replace("-", " ");
     const firstSpaceIndex = rawFullName.indexOf(" ");
     const lastSpaceIndex = rawFullName.lastIndexOf(" ");
@@ -31,11 +31,27 @@ export const Student = {
     this.lastName = capitalize(lastName);
     this.nickname = capitalize(nickname);
     this.middleName = middleName.includes('"') ? "" : capitalize(middleName);
+    this.image = { firstName: this.firstName, lastName: this.lastName };
   },
-  setHouse: function (rawHouse) {
-    this.house = capitalize(rawHouse.trim());
+  set house(rawHouse) {
+    this._house = capitalize(rawHouse.trim());
   },
-  setGender: function (gender) {
-    this.gender = gender;
+  get house() {
+    return this._house;
+  },
+  set gender(gender) {
+    this._gender = gender;
+  },
+  get gender() {
+    return this._gender;
+  },
+  get fullName() {
+    return `${this.firstName} ${this.nickname ? this.nickname : ""} ${
+      this.middleName
+    } ${this.lastName}`;
+  },
+
+  set image({ firstName, lastName }) {
+    this._image = `./images/${lastName.toLowerCase()}_${firstName[0]}.png`;
   },
 };

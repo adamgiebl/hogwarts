@@ -1,58 +1,53 @@
-@font-face {
-  font-family: "bluu";
-  src: url("./fonts/bluunext-bold-webfont.woff2") format("woff2"),
-    url("./fonts/bluunext-bold-webfont.woff") format("woff"),
-    url("./fonts/bluunext-bold.ttf") format("truetype"),
-    url("./fonts/bluunext-bold-webfont.svg#bluu_nextbold") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "bluu";
-  src: url("./fonts/bluunext-bolditalic-webfont.woff2") format("woff2"),
-    url("./fonts/bluunext-bolditalic-webfont.woff") format("woff"),
-    url("./fonts/bluunext-bolditalic.ttf") format("truetype"),
-    url("./fonts/bluunext-bolditalic-webfont.svg#bluu_nextbold_italic")
-      format("svg");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "bluu_nexttitling";
-  src: url("./fonts/BluuNext-Titling.ttf") format("truetype"),
-    url("./fonts/bluunext-titling.woff2") format("woff2"),
-    url("./fonts/bluunext-titling.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  font-family: bluu;
-  background: #1d2d44;
-  color: #f0ebd8;
-}
-
-h1 {
-  text-align: center;
-}
-
-.italic {
-  font-style: italic;
-}
-.tilt {
-  font-family: bluu_nexttitling;
-}
-.student-table {
+.app {
+  background: var(--darkGrey);
+  border: 18px solid var(--black);
+  border-radius: 30px;
+  max-width: 1100px;
+  height: 800px;
   margin: auto;
-  max-width: 1000px;
-  width: 100%;
-  background: #3e5c76;
-  padding: 10px;
+  margin-top: 40px;
+  box-shadow: 0px 0px 72px -23px rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
 }
 
-.student-table th:nth-child(odd),
-.student-table td:nth-child(odd) {
-  background: #748cab;
+.app__header {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper::before {
+  content: "";
+  background: url("./images/search.svg");
+  width: 17px;
+  height: 17px;
+  top: 28%;
+  left: 6%;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.app__content {
+  width: 100%;
+}
+
+.app__details {
+  width: 600px;
+  height: 100%;
+  padding: 30px;
+  background: var(--darkGrey);
+  color: var(--lightGreyText);
+  text-align: center;
+  box-shadow: 0px 0px 72px -23px rgba(0, 0, 0, 0.75);
+}
+
+.app__details h3 {
+  font-size: 26px;
 }
