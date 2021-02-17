@@ -1,0 +1,33 @@
+.app__details {
+  margin-right: -600px;
+  width: 600px;
+  height: 100%;
+  padding: 30px;
+  background: var(--darkGrey);
+  color: var(--lightGreyText);
+  text-align: center;
+  box-shadow: 0px 0px 72px -23px rgba(0, 0, 0, 0.75);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.app__details.open {
+  margin-right: 0;
+}
+
+.app__details h3 {
+  font-size: 26px;
+  color: var(--accentColor);
+}
+
+.label {
+  width: 55%;
+  background: var(--hufflepuff);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 10px;
+  bottom: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

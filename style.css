@@ -24,7 +24,7 @@
 
 .search-wrapper::before {
   content: "";
-  background: url("./images/search.svg");
+  background: url("./icons/search.svg");
   width: 17px;
   height: 17px;
   top: 28%;
@@ -36,18 +36,4 @@
 
 .app__content {
   width: 100%;
-}
-
-.app__details {
-  width: 600px;
-  height: 100%;
-  padding: 30px;
-  background: var(--darkGrey);
-  color: var(--lightGreyText);
-  text-align: center;
-  box-shadow: 0px 0px 72px -23px rgba(0, 0, 0, 0.75);
-}
-
-.app__details h3 {
-  font-size: 26px;
 }

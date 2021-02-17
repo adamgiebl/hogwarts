@@ -43,7 +43,7 @@
   --lightGrey: #333333;
   --red: #f8454d;
   --green: #2b8d83;
-  --yellow: #ffd148;
+  --yellow: #ffaa00;
   --blue: #3783da;
   --greyText: #4b4b4b;
   --lightGreyText: #919191;
@@ -51,11 +51,13 @@
   --slytherin: var(--green);
   --ravenclaw: var(--blue);
   --hufflepuff: var(--yellow);
+  --accentColor: white;
 }
 
 body {
   font-family: bluu;
   color: var(--greyText);
+  background: var(--black);
 }
 
 .italic {
@@ -82,4 +84,18 @@ input[type="text"] {
 
 input[type="text"]::placeholder {
   color: #f0ebd8;
+}
+
+*::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--grey); /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--darkGrey); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid var(--grey); /* creates padding around scroll thumb */
 }

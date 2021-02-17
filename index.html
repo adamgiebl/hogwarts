@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./table.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./details.css" />
   </head>
   <body>
     <div class="app">
@@ -25,60 +26,36 @@
             <thead class="table__header">
               <tr>
                 <td data-field="rownumber" data-order="false">#</td>
-                <th data-field="firstName">
+                <th data-field="firstName" class="filter-cell">
                   First name
-                  <svg
-                    id="Solid"
-                    height="512"
-                    viewBox="0 0 512 512"
-                    width="512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
                     />
                   </svg>
                 </th>
-                <th data-field="lastName" data-order="false">
+                <th data-field="lastName" data-order="false" class="filter-cell">
                   Last name
-                  <svg
-                    id="Solid"
-                    height="512"
-                    viewBox="0 0 512 512"
-                    width="512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
                     />
                   </svg>
                 </th>
-                <th data-field="house" data-order="false">
+                <th data-field="house" data-order="false" class="filter-cell">
                   House
-                  <svg
-                    id="Solid"
-                    height="512"
-                    viewBox="0 0 512 512"
-                    width="512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
                     />
                   </svg>
                 </th>
-                <th data-field="gender" data-order="false">
+                <th data-field="gender" data-order="false" class="filter-cell">
                   Gender
-                  <svg
-                    id="Solid"
-                    height="512"
-                    viewBox="0 0 512 512"
-                    width="512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
@@ -91,22 +68,23 @@
           </table>
         </div>
       </div>
-      <div class="app__details">
+      <div class="app__details open">
         <img src="src" alt="" />
         <h3>Student name</h3>
         <span>House name</span>
+        <div class="label"></div>
       </div>
     </div>
 
     <template class="row-template">
       <tr class="data-row">
-        <td data-field="rownumber"></td>
-        <td data-field="firstname"></td>
-        <td data-field="lastname"></td>
+        <td data-field="rowNumber"></td>
+        <td data-field="firstName"></td>
+        <td data-field="lastName"></td>
         <td data-field="house"></td>
         <td data-field="gender"></td>
       </tr>
     </template>
-    <script src="./scripts/script.js" type="module"></script>
+    <script src="./scripts/app.js" type="module"></script>
   </body>
 </html>
