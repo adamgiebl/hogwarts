@@ -26,19 +26,19 @@ overview of the students in the current year, and sort, filter, and search for c
 
 #### Searching
 
-- [ ] search by first/last name
+- [x] search by first/last name
 
 #### List Interface
 
 - [ ] show number of students in each house
-- [ ] total number of students (not expelled)
+- [x] total number of students (not expelled)
 - [ ] number of students expelled
-- [ ] number of students currently displayed
+- [x] number of students currently displayed
 
 #### Details Interface
 
-- [ ] be able to click on a student and open a details view
-- [ ] details view must be themed/decorated with house crest and colors
+- [x] be able to click on a student and open a details view
+- [x] details view must be themed/decorated with house crest and colors
 - details view must show:
   - [x] first name
   - [x] middle name

@@ -17,7 +17,10 @@ export const Student = {
     const lastSpaceIndex = rawFullName.lastIndexOf(' ')
     const firstName = rawFullName.slice(0, firstSpaceIndex)
     const lastName = rawFullName.slice(lastSpaceIndex + 1)
-    const nickname = rawFullName.substring(rawFullName.indexOf('"') + 1, rawFullName.lastIndexOf('"'))
+    const nickname = rawFullName.substring(
+      rawFullName.indexOf('"') + 1,
+      rawFullName.lastIndexOf('"')
+    )
     const middleName = rawFullName.slice(firstSpaceIndex + 1, lastSpaceIndex)
 
     this.firstName = capitalize(firstName)
@@ -39,10 +42,18 @@ export const Student = {
     return this._gender
   },
   get fullName() {
-    return `${this.firstName} ${this.nickname ? this.nickname : ''} ${this.middleName} ${this.lastName}`
+    return `${this.firstName} ${this.nickname ? this.nickname : ''} ${this.middleName} ${
+      this.lastName
+    }`
   },
 
   set image({ firstName, lastName }) {
     this._image = `./images/${lastName.toLowerCase()}_${firstName[0]}.png`
   }
+}
+
+export const FilterTag = {
+  textContent: '',
+  filterProperty: '',
+  selected: false
 }

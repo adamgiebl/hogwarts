@@ -2,13 +2,13 @@
   width: 100%;
   padding: 10px;
   border-collapse: collapse;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .table-wrapper {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 645px;
+  height: 603px;
 }
 
 .table__header th {
@@ -37,9 +37,54 @@ th {
 .table thead tr th {
   cursor: pointer;
   user-select: none;
+  position: sticky;
+  top: 0;
+  background: var(--darkGrey);
+  z-index: 10;
 }
 
-.table thead tr th:hover {
+.table thead tr th::before {
+  content: '';
+  background: var(--black);
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.table-footer {
+  z-index: 10;
+}
+.table-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+.count {
+  font-size: 14px;
+}
+.count-value {
+  font-size: 15px;
+}
+.table-footer-cell {
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  bottom: 0;
+  background: var(--darkGrey);
+}
+
+.table-footer-cell::before {
+  content: '';
+  background: var(--black);
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+}
+
+.table thead tr th.filter-cell:hover {
   background: var(--grey);
   color: var(--accentColor);
 }
@@ -62,7 +107,7 @@ th {
   color: var(--lightGreyText);
 }
 
-.table td[data-field="rownumber"] {
+.table td[data-field='rownumber'] {
   font-weight: 300;
 }
 
@@ -86,12 +131,53 @@ th {
   padding: 5px 15px;
   border-radius: 4px;
   font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-wrapper .tag {
+  margin-bottom: 5px;
+}
+
+.tag--slytherin {
+  background: var(--slytherin);
+}
+.tag--hufflepuff {
+  background: var(--hufflepuff);
+}
+.tag--ravenclaw {
+  background: var(--ravenclaw);
+}
+.tag--gryffindor {
+  background: var(--gryffindor);
+}
+
+.tag--prefect {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(0,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%23c58000'/%3E%3Cstop offset='1' stop-color='%23c58000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='17' height='17' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='8.5' cy='8.5' r='8.5'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.19'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 0 20px;
+  color: var(--black);
+  font-weight: 700;
+}
+
+.filter-wrapper .tag {
+  opacity: 0.5;
+}
+
+.filter-wrapper .tag--selected {
+  opacity: 1;
 }
 
 .tag--boy {
   background: #505050;
+  border: 2px solid #404040;
+  padding: 3px 13px;
 }
 
 .tag--girl {
-  background: var(--lightGreyText);
+  background: #404040;
+  border: 2px solid #505050;
+  padding: 3px 13px;
 }

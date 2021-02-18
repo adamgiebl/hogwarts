@@ -10,12 +10,19 @@
   display: flex;
   align-items: stretch;
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 
 .app__header {
   padding: 40px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.header-search {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-bottom: 30px;
 }
 
 .search-wrapper {
@@ -23,8 +30,8 @@
 }
 
 .search-wrapper::before {
-  content: "";
-  background: url("./icons/search.svg");
+  content: '';
+  background: url('./icons/search.svg');
   width: 17px;
   height: 17px;
   top: 28%;
@@ -36,4 +43,9 @@
 
 .app__content {
   width: 100%;
+}
+
+.filter-wrapper {
+  position: relative;
+  z-index: 15;
 }

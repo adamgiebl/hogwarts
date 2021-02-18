@@ -7,28 +7,88 @@
     <title>Document</title>
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./table.css" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./app.css" />
     <link rel="stylesheet" href="./details.css" />
   </head>
   <body>
     <div class="app">
       <div class="app__content">
         <div class="app__header">
-          <div class="text">
-            <h1>Hogwarts</h1>
+          <div class="header-search">
+            <div class="search-wrapper">
+              <input class="search" type="text" placeholder="Search" />
+            </div>
           </div>
-          <div class="search-wrapper">
-            <input class="search" type="text" placeholder="Search" />
+          <div class="header-filter">
+            <div class="filter-wrapper">
+              <div
+                class="tag tag--slytherin"
+                data-value="slytherin"
+                data-property="house"
+                data-type="inclusive"
+              >
+                Slytherin
+              </div>
+              <div
+                class="tag tag--hufflepuff"
+                data-value="hufflepuff"
+                data-property="house"
+                data-type="inclusive"
+              >
+                Hufflepuff
+              </div>
+              <div
+                class="tag tag--gryffindor"
+                data-value="gryffindor"
+                data-property="house"
+                data-type="inclusive"
+              >
+                Gryffindor
+              </div>
+              <div
+                class="tag tag--ravenclaw"
+                data-value="ravenclaw"
+                data-property="house"
+                data-type="inclusive"
+              >
+                Ravenclaw
+              </div>
+              <div
+                class="tag tag--boy"
+                data-value="boy"
+                data-property="gender"
+                data-type="exclusive"
+              >
+                Boy
+              </div>
+              <div
+                class="tag tag--girl"
+                data-value="girl"
+                data-property="gender"
+                data-type="exclusive"
+              >
+                Girl
+              </div>
+              <div class="tag tag--prefect" data-property="isPrefect" data-type="exclusive">
+                Prefect
+              </div>
+            </div>
           </div>
         </div>
         <div class="table-wrapper">
           <table class="table">
             <thead class="table__header">
               <tr>
-                <td data-field="rownumber" data-order="false">#</td>
+                <th data-field="rownumber">#</th>
                 <th data-field="firstName" class="filter-cell">
                   First name
-                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    id="Solid"
+                    height="512"
+                    viewBox="0 0 512 512"
+                    width="512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
@@ -37,7 +97,13 @@
                 </th>
                 <th data-field="lastName" data-order="false" class="filter-cell">
                   Last name
-                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    id="Solid"
+                    height="512"
+                    viewBox="0 0 512 512"
+                    width="512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
@@ -46,7 +112,13 @@
                 </th>
                 <th data-field="house" data-order="false" class="filter-cell">
                   House
-                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    id="Solid"
+                    height="512"
+                    viewBox="0 0 512 512"
+                    width="512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
@@ -55,7 +127,13 @@
                 </th>
                 <th data-field="gender" data-order="false" class="filter-cell">
                   Gender
-                  <svg id="Solid" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    id="Solid"
+                    height="512"
+                    viewBox="0 0 512 512"
+                    width="512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       fill="#4b4b4b"
                       d="m400 216a23.928 23.928 0 0 1 -16.971-7.029l-127.029-127.03-127.029 127.03a24 24 0 0 1 -33.942-33.942l144-144a24 24 0 0 1 33.942 0l144 144a24 24 0 0 1 -16.971 40.971zm-127.029 264.971 144-144a24 24 0 0 0 -33.942-33.942l-127.029 127.03-127.029-127.03a24 24 0 0 0 -33.942 33.942l144 144a24 24 0 0 0 33.942 0z"
@@ -65,13 +143,31 @@
               </tr>
             </thead>
             <tbody></tbody>
+            <tfoot class="table-footer">
+              <tr>
+                <td class="table-footer-cell" colspan="10">
+                  <div class="table-info">
+                    <div class="count total-count">
+                      Students in total: <span class="count-value total-count-value">100</span>
+                    </div>
+                    <div class="count list-count">
+                      Results: <span class="count-value results-count-value">100</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
-      <div class="app__details open">
-        <img src="src" alt="" />
-        <h3>Student name</h3>
-        <span>House name</span>
+      <div class="app__details">
+        <button class="close-details"><img src="./icons/close.svg" alt="" /></button>
+        <div class="image-wrapper">
+          <img src="src" alt="" />
+        </div>
+
+        <h3 class="name">Student name</h3>
+        <span class="house">House name</span>
         <div class="label"></div>
       </div>
     </div>

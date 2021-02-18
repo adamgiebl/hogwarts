@@ -1,10 +1,13 @@
 export const View = {
   elements: {},
   Controller: null,
+  totalStudentCount: null,
 
-  init(Controller) {
+  init(Controller, totalStudentCount) {
     this.Controller = Controller
     this.elements = this.runDOMQueries()
+    this.totalStudentCount = totalStudentCount
+    this.initDetails()
   },
 
   renderTable(students) {
@@ -30,6 +33,13 @@ export const View = {
 
       this.elements.tableBody.appendChild(tableRowClone)
     })
+
+    this.updateCount(students.length)
+  },
+
+  updateCount(resultsCount) {
+    this.elements.totalStudentCount.textContent = this.totalStudentCount
+    this.elements.resultsCount.textContent = resultsCount
   },
 
   renderDetails(student) {
@@ -37,8 +47,16 @@ export const View = {
     detailsView.classList.add('open')
     detailsView.querySelector('h3').textContent = student.fullName
     detailsView.querySelector('span').textContent = student.house
-    detailsView.querySelector('img').src = student._image
-    this.applyLabel(student.house)
+    detailsView.querySelector('.image-wrapper img').src = student._image
+    this.applyHouseColors(student.house)
+  },
+
+  initDetails() {
+    const buttonClose = this.elements.buttonCloseDetails
+    const detailsView = this.elements.detailsView
+    buttonClose.addEventListener('click', () => {
+      detailsView.classList.remove('open')
+    })
   },
 
   createTag(text = '', color = '') {
@@ -64,8 +82,9 @@ export const View = {
     return tag
   },
 
-  applyLabel(house) {
+  applyHouseColors(house) {
     this.elements.detailsLabel.style.background = `var(--${house.toLowerCase()})`
+    this.elements.imageWrapper.style.background = `var(--${house.toLowerCase()})`
   },
 
   getDataCells(row) {
@@ -80,11 +99,17 @@ export const View = {
 
   runDOMQueries() {
     return {
-      filterHeadCells: document.querySelectorAll('th[data-field]'),
+      filterHeadCells: document.querySelectorAll('th[data-field].filter-cell'),
+      filterTags: document.querySelectorAll('.filter-wrapper .tag'),
       tableBody: document.querySelector('.table tbody'),
       tableRowTemplate: document.querySelector('.row-template').content,
       detailsView: document.querySelector('.app__details'),
-      detailsLabel: document.querySelector('.app__details .label')
+      detailsLabel: document.querySelector('.app__details .label'),
+      searchInput: document.querySelector('.search'),
+      imageWrapper: document.querySelector('.image-wrapper'),
+      buttonCloseDetails: document.querySelector('.close-details'),
+      totalStudentCount: document.querySelector('.total-count-value'),
+      resultsCount: document.querySelector('.results-count-value')
     }
   }
 }
