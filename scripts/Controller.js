@@ -1,4 +1,4 @@
-import { sortDownUp, sortUpDown } from './utils.js'
+import { filterStudentsByTags, searchStudents, sortStudents } from './filtering.js'
 
 export const Controller = {
   students: [],
@@ -10,11 +10,20 @@ export const Controller = {
     this.Student = Student
 
     const GET_STUDENTS = 'https://petlatkea.dk/2021/hogwarts/students.json'
+    const GET_FAMILIES = 'https://petlatkea.dk/2021/hogwarts/families.json'
     const studentsData = await this.fetchJSON(GET_STUDENTS)
+    const familiesData = await this.fetchJSON(GET_FAMILIES)
 
-    this.students = this.createStudents(studentsData)
+    this.students = this.createStudents(studentsData, familiesData)
 
     this.students[2].isPrefect = true
+    this.students[6].isPrefect = true
+    this.students[8].isPrefect = true
+    this.students[15].isPrefect = true
+    this.students[26].isPrefect = true
+    this.students[13].isPrefect = true
+    this.students[26].isInquisitor = true
+    this.students[13].isInquisitor = true
 
     this.View.init(this, this.students.length)
 
@@ -24,17 +33,12 @@ export const Controller = {
       tableHeadCell.addEventListener('click', () => {
         this.filteredStudents =
           this.filteredStudents.length === 0 ? this.students : this.filteredStudents
-        this.filteredStudents = this.sortStudents(this.filteredStudents, tableHeadCell)
+        this.filteredStudents = sortStudents(this.filteredStudents, tableHeadCell)
         this.View.renderTable(this.filteredStudents)
       })
     })
     this.View.elements.searchInput.addEventListener('keyup', e => {
-      this.filteredStudents = this.searchStudents(this.students, e.target.value)
-      this.View.renderTable(this.filteredStudents)
-    })
-
-    this.View.elements.searchInput.addEventListener('keyup', e => {
-      this.filteredStudents = this.searchStudents(this.students, e.target.value)
+      this.filteredStudents = searchStudents(this.students, e.target.value)
       this.View.renderTable(this.filteredStudents)
     })
 
@@ -45,92 +49,84 @@ export const Controller = {
         if (selected) filterTag.classList.add('tag--selected')
         else filterTag.classList.remove('tag--selected')
 
-        this.filteredStudents = this.filterStudentsByTags(this.students)
+        this.filteredStudents = filterStudentsByTags(this.students)
         this.View.renderTable(this.filteredStudents)
       })
     })
+
+    this.View.renderDetails(this.students[3])
   },
 
-  filterStudentsByTags(students) {
-    const selectedTags = document.querySelectorAll('.tag--selected')
-    let filteredStudents = []
-    console.log(selectedTags)
-    if (selectedTags.length === 0) {
-      return students
-    }
-
-    selectedTags.forEach(tag => {
-      if (tag.dataset.type === 'inclusive') {
-        const filterProperty = tag.dataset.property
-        const filterValue = tag.dataset.value
-        students.forEach(student => {
-          console.log(student[filterProperty])
-          if (typeof student[filterProperty] === 'boolean') {
-            if (student[filterProperty]) {
-              filteredStudents.push(student)
-            }
-          } else {
-            if (student[filterProperty].toLowerCase() === filterValue.toLowerCase()) {
-              filteredStudents.push(student)
-            }
-          }
-        })
-      }
-    })
-
-    if (filteredStudents.length === 0) {
-      filteredStudents = students
-    }
-    selectedTags.forEach(tag => {
-      if (tag.dataset.type === 'exclusive') {
-        const filterProperty = tag.dataset.property
-        const filterValue = tag.dataset.value
-        filteredStudents = filteredStudents.filter(student => {
-          if (typeof student[filterProperty] === 'boolean') {
-            if (student[filterProperty]) {
-              return true
-            }
-          } else {
-            if (student[filterProperty].toLowerCase() === filterValue.toLowerCase()) {
-              return true
-            } else {
-              return false
-            }
-          }
-        })
-      }
-    })
-    return filteredStudents
+  refreshTable() {
+    this.filteredStudents = filterStudentsByTags(this.students)
+    this.View.renderTable(this.filteredStudents)
   },
-  createStudents(studentsData) {
+
+  createStudents(studentsData, familiesData) {
+    console.log(familiesData)
     const students = []
-    studentsData.forEach(studentJson => {
+    studentsData.forEach((studentJson, index) => {
       const student = Object.create(this.Student)
+      student.id = index.toString()
       student.name = studentJson.fullname
       student.house = studentJson.house
       student.gender = studentJson.gender
+      student.bloodStatus = this.determineBloodStatus(student.lastName, familiesData)
       students.push(student)
     })
     return students
   },
-  sortStudents(students, tableHeadCell, sortBy = null) {
-    const sortByKey = sortBy ? sortBy : tableHeadCell.dataset.field
 
-    const order = tableHeadCell.dataset.order === 'true'
-
-    tableHeadCell.dataset.order = !order
-    if (order) {
-      return students.sort((a, b) => sortDownUp(a, b, sortByKey))
-    }
-    return students.sort((a, b) => sortUpDown(a, b, sortByKey))
-  },
-  searchStudents(students, searchTerm) {
-    return students.filter(
-      student =>
-        student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+  determineBloodStatus(lastName, families) {
+    const half = families.half.find(
+      familyName => lastName.toLowerCase() === familyName.toLowerCase()
     )
+    const pure = families.pure.find(
+      familyName => lastName.toLowerCase() === familyName.toLowerCase()
+    )
+
+    if (half && pure) {
+      return 'Half-Blood'
+    } else if (half) {
+      return 'Half-Blood'
+    } else if (pure) {
+      return 'Pure-Blood'
+    } else {
+      return 'Muggle'
+    }
   },
+
+  setStudentStatus(studentId, status, value, callback = () => {}) {
+    const student = this.students.find(student => student.id === studentId)
+    if (!student) return console.error('Student not found')
+    student[status] = value
+    this.View.renderDetails(student)
+    callback(student.id, status, student[status])
+  },
+
+  toggleStudentStatus(studentId, status, callback = () => {}) {
+    const student = this.students.find(student => student.id === studentId)
+
+    if (!student) return console.error('Student not found')
+
+    if (status === 'isPrefect' && !student[status] && !this.canPrefectBeAdded(student.house)) {
+      console.warn('Two prefects are already in this house.')
+      return
+    }
+
+    student[status] = !student[status]
+    console.log('Student status changed: ', { [status]: student[status] })
+    this.View.renderDetails(student)
+    callback(student.id, status, student[status])
+  },
+
+  canPrefectBeAdded(house) {
+    const prefectsInHouse = this.students.filter(
+      student => student.house === house && student.isPrefect
+    )
+    return prefectsInHouse.length < 2
+  },
+
   fetchJSON(url) {
     return fetch(url).then(res => res.json())
   }

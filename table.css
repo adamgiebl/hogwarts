@@ -8,7 +8,7 @@
 .table-wrapper {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 603px;
+  height: 572px;
 }
 
 .table__header th {
@@ -41,6 +41,7 @@ th {
   top: 0;
   background: var(--darkGrey);
   z-index: 10;
+  font-size: 15px;
 }
 
 .table thead tr th::before {
@@ -119,8 +120,21 @@ th {
   from {
     transform: translateX(0);
   }
-  from {
+  to {
     transform: translateX(20px);
+  }
+}
+
+.disappear {
+  animation: disappear 1s ease-in-out;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -171,13 +185,29 @@ th {
 }
 
 .tag--boy {
-  background: #505050;
-  border: 2px solid #404040;
+  background: var(--darkGrey);
+  border: 2px solid var(--blue);
   padding: 3px 13px;
+  color: var(--blue);
 }
 
 .tag--girl {
-  background: #404040;
-  border: 2px solid #505050;
+  background: var(--darkGrey);
+  border: 2px solid var(--red);
+  padding: 3px 13px;
+  color: var(--red);
+}
+
+.tag--expelled {
+  background: var(--lightGrey);
+  border: 2px solid var(--lightGreyText);
+  color: var(--lightGreyText);
+  padding: 3px 13px;
+}
+
+.tag--inquisitor {
+  background: var(--black);
+  border: 2px solid var(--brown);
+  color: var(--brown);
   padding: 3px 13px;
 }

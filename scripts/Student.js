@@ -1,6 +1,7 @@
 import { capitalize } from './utils.js'
 
 export const Student = {
+  id: '',
   firstName: '',
   middleName: '',
   nickname: '',
@@ -36,7 +37,7 @@ export const Student = {
     return this._house
   },
   set gender(gender) {
-    this._gender = gender
+    this._gender = capitalize(gender)
   },
   get gender() {
     return this._gender
@@ -46,7 +47,6 @@ export const Student = {
       this.lastName
     }`
   },
-
   set image({ firstName, lastName }) {
     this._image = `./images/${lastName.toLowerCase()}_${firstName[0]}.png`
   }

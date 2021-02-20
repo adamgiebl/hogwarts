@@ -21,8 +21,8 @@ overview of the students in the current year, and sort, filter, and search for c
 
 #### Filtering
 
-- [ ] filter by categories (house, prefects...)
-- [ ] filter expelled/non-expelled
+- [x] filter by categories (house, prefects...)
+- [x] filter expelled/non-expelled
 
 #### Searching
 
@@ -32,7 +32,7 @@ overview of the students in the current year, and sort, filter, and search for c
 
 - [ ] show number of students in each house
 - [x] total number of students (not expelled)
-- [ ] number of students expelled
+- [x] number of students expelled
 - [x] number of students currently displayed
 
 #### Details Interface
@@ -46,24 +46,26 @@ overview of the students in the current year, and sort, filter, and search for c
   - [x] last name
   - [x] photo of student
   - [ ] house crest and colors
-  - [ ] blood-status
+  - [x] blood-status
   - [ ] if student is prefect
-  - [ ] if student is expelled
+  - [x] if student is expelled
   - [ ] if student is member of the inquisitorial squad
+- [ ] fix images for Patil
+- [ ] fix last name for Finch-Fletchley
 
 ### Functionality
 
 #### Expelling
 
-- [ ] be able to expel a student, expelling removes a student from the list
-- [ ] expelling cannot be revoked
+- [x] be able to expel a student, expelling removes a student from the list
+- [x] expelling cannot be revoked
 - [ ] expelling adds a student to a different list
 
 #### Prefects
 
-- [ ] be able to make student a prefect
+- [x] be able to make student a prefect
 - [ ] only two students from each house can be selected prefects (boy and a girl)
-- [ ] be able to revoke prefect status
+- [x] be able to revoke prefect status
 
 #### Blood status
 
@@ -79,6 +81,6 @@ https://petlatkea.dk/2021/hogwarts/families.json
 
 #### Inquisitorial squad
 
-- [ ] be able to appoint students to the inquisitorial squad, and remove them again
-- [ ] any number of students can be appointed
+- [x] be able to appoint students to the inquisitorial squad, and remove them again
+- [x] any number of students can be appointed
 - [ ] only pure-blood or students from Slytherin may be appointed

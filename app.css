@@ -49,3 +49,27 @@
   position: relative;
   z-index: 15;
 }
+
+.filter-wrapper .tag img {
+  height: 15px;
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: -3px;
+  margin-bottom: 1px;
+  mix-blend-mode: soft-light;
+}
+
+.filter-wrapper .tag--inquisitor img,
+.filter-wrapper .tag--boy img,
+.filter-wrapper .tag--girl img,
+.filter-wrapper .tag--expelled img {
+  margin-bottom: 2px;
+}
+
+.filter-wrapper .tag--selected img.add-icon {
+  display: none;
+}
+
+.filter-wrapper .tag:not(.tag--selected) img.remove-icon {
+  display: none;
+}

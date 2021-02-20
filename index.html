@@ -27,7 +27,8 @@
                 data-property="house"
                 data-type="inclusive"
               >
-                Slytherin
+                Slytherin <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
               <div
                 class="tag tag--hufflepuff"
@@ -35,7 +36,8 @@
                 data-property="house"
                 data-type="inclusive"
               >
-                Hufflepuff
+                Hufflepuff <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
               <div
                 class="tag tag--gryffindor"
@@ -43,7 +45,8 @@
                 data-property="house"
                 data-type="inclusive"
               >
-                Gryffindor
+                Gryffindor <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
               <div
                 class="tag tag--ravenclaw"
@@ -51,15 +54,18 @@
                 data-property="house"
                 data-type="inclusive"
               >
-                Ravenclaw
+                Ravenclaw <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
+              <br />
               <div
                 class="tag tag--boy"
                 data-value="boy"
                 data-property="gender"
                 data-type="exclusive"
               >
-                Boy
+                Boy <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
               <div
                 class="tag tag--girl"
@@ -67,10 +73,20 @@
                 data-property="gender"
                 data-type="exclusive"
               >
-                Girl
+                Girl <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
               <div class="tag tag--prefect" data-property="isPrefect" data-type="exclusive">
-                Prefect
+                Prefect <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
+              </div>
+              <div class="tag tag--inquisitor" data-property="isInquisitor" data-type="exclusive">
+                Inquisitorial squad <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
+              </div>
+              <div class="tag tag--expelled" data-property="isExpelled" data-type="exclusive">
+                Expelled <img class="add-icon" src="./icons/add.svg" alt="" />
+                <img class="remove-icon" src="./icons/minus.svg" alt="" />
               </div>
             </div>
           </div>
@@ -162,18 +178,37 @@
       </div>
       <div class="app__details">
         <button class="close-details"><img src="./icons/close.svg" alt="" /></button>
-        <div class="image-wrapper">
-          <img src="src" alt="" />
+        <div class="expelled-label">
+          <div class="image-wrapper">
+            <img src="src" alt="" />
+          </div>
         </div>
 
         <h3 class="name">Student name</h3>
         <span class="house">House name</span>
+        <div class="information">
+          <ul>
+            <li>Blood status: <span class="blood-status">Muggle</span></li>
+            <li>Gender: <span class="gender">Undefined</span></li>
+          </ul>
+        </div>
+        <div class="tags">
+          <div class="tag tag--prefect">Prefect</div>
+          <div class="tag tag--inquisitor">Inquisitorial squad</div>
+        </div>
+        <div class="buttons">
+          <button class="button button--expel" data-studentid>Expel</button>
+          <button class="button button--prefect" data-studentid>Make prefect</button>
+          <button class="button button--inquisitor" data-studentid>
+            Add to inquisitorial squad
+          </button>
+        </div>
         <div class="label"></div>
       </div>
     </div>
 
     <template class="row-template">
-      <tr class="data-row">
+      <tr class="data-row" data-studentid>
         <td data-field="rowNumber"></td>
         <td data-field="firstName"></td>
         <td data-field="lastName"></td>

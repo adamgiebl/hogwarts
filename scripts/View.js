@@ -10,17 +10,19 @@ export const View = {
     this.initDetails()
   },
 
-  renderTable(students) {
+  renderTable(students = []) {
     this.elements.tableBody.innerHTML = ''
-
+    if (students.length === 0) students = this.Controller.filteredStudents
     students.forEach((student, index) => {
       const tableRowClone = this.elements.tableRowTemplate.cloneNode(true)
       const dataCells = this.getDataCells(tableRowClone)
       const currentRow = tableRowClone.children[0]
+
+      currentRow.dataset.studentid = 'id' + student.id
       dataCells.firstName.textContent = student.firstName
       dataCells.lastName.textContent = student.lastName
 
-      const houseTag = this.createTag(student.house, `var(--${student.house.toLowerCase()})`)
+      const houseTag = this.createTag(student.house, `tag--${student.house.toLowerCase()}`)
       dataCells.house.appendChild(houseTag)
       dataCells.gender.appendChild(this.createGenderTag(student.gender))
       dataCells.rowNumber.textContent = index + 1
@@ -43,11 +45,32 @@ export const View = {
   },
 
   renderDetails(student) {
-    const detailsView = this.elements.detailsView
-    detailsView.classList.add('open')
-    detailsView.querySelector('h3').textContent = student.fullName
-    detailsView.querySelector('span').textContent = student.house
-    detailsView.querySelector('.image-wrapper img').src = student._image
+    const elems = this.elements
+    elems.detailsTags.innerHTML = ''
+    if (student.isExpelled) {
+      elems.detailsView.classList.add('expelled')
+    } else {
+      elems.detailsView.classList.remove('expelled')
+    }
+    if (student.isInquisitor) {
+      elems.detailsTags.appendChild(this.createTag('Inquisitorial squad', 'tag--inquisitor'))
+      elems.buttonInquisitor.textContent = 'Remove from Inquisitorial squad'
+    } else {
+      elems.buttonInquisitor.textContent = 'Add to inquisitorial squad'
+    }
+    if (student.isPrefect) {
+      elems.detailsTags.appendChild(this.createTag('Prefect', 'tag--prefect'))
+      elems.buttonPrefect.textContent = 'Revoke Prefect status'
+    } else {
+      elems.buttonPrefect.textContent = 'Make prefect'
+    }
+    elems.detailsView.classList.add('open')
+    elems.detailsView.querySelector('h3').textContent = student.fullName
+    elems.detailsView.querySelector('span').textContent = student.house
+    elems.detailsView.querySelector('.image-wrapper img').src = student._image
+    elems.bloodStatusLabel.textContent = student.bloodStatus
+    elems.genderLabel.textContent = student.gender
+    this.elements.buttonExpel.dataset.studentid = student.id
     this.applyHouseColors(student.house)
   },
 
@@ -57,26 +80,63 @@ export const View = {
     buttonClose.addEventListener('click', () => {
       detailsView.classList.remove('open')
     })
+    const buttonExpel = this.elements.buttonExpel
+    buttonExpel.addEventListener('click', () => {
+      this.Controller.setStudentStatus(
+        buttonExpel.dataset.studentid,
+        'isExpelled',
+        true,
+        this.visuallyReflectStatusChange.bind(this)
+      )
+    })
+
+    const buttonPrefect = this.elements.buttonPrefect
+    buttonPrefect.addEventListener('click', () => {
+      this.Controller.toggleStudentStatus(
+        buttonExpel.dataset.studentid,
+        'isPrefect',
+        this.visuallyReflectStatusChange.bind(this)
+      )
+    })
+
+    const buttonInquisitor = this.elements.buttonInquisitor
+    buttonInquisitor.addEventListener('click', () => {
+      this.Controller.toggleStudentStatus(
+        buttonExpel.dataset.studentid,
+        'isInquisitor',
+        this.visuallyReflectStatusChange.bind(this)
+      )
+    })
   },
 
-  createTag(text = '', color = '') {
+  createTag(text = '', className = '') {
     const tag = document.createElement('div')
-    tag.classList.add('tag')
+    tag.classList.add(...['tag', className])
     tag.textContent = text
-    tag.style.background = color
     return tag
   },
 
-  runAnimationOnce(element, className) {
+  visuallyReflectStatusChange(studentId, status, value) {
+    const studentRow = document.querySelector(`.data-row[data-studentid=id${studentId}]`)
+    const isExpelled = status === 'isExpelled'
+    const animationName = isExpelled ? 'disappear' : 'anime'
+    this.runAnimationOnce(studentRow, animationName, () => {
+      return isExpelled ? studentRow.remove() : this.Controller.refreshTable()
+    })
+  },
+
+  runAnimationOnce(element, className, callback = () => {}) {
+    if (!element) return
     element.classList.add(className)
     element.addEventListener('animationend', () => {
       element.classList.remove(className)
+      callback()
     })
   },
 
   createGenderTag(gender = 'boy') {
     const tag = document.createElement('div')
-    const className = `tag--${gender}`
+    const className = `tag--${gender.toLowerCase()}`
     tag.classList.add('tag', className)
     tag.textContent = gender
     return tag
@@ -109,7 +169,13 @@ export const View = {
       imageWrapper: document.querySelector('.image-wrapper'),
       buttonCloseDetails: document.querySelector('.close-details'),
       totalStudentCount: document.querySelector('.total-count-value'),
-      resultsCount: document.querySelector('.results-count-value')
+      resultsCount: document.querySelector('.results-count-value'),
+      buttonExpel: document.querySelector('.button--expel'),
+      buttonPrefect: document.querySelector('.button--prefect'),
+      buttonInquisitor: document.querySelector('.button--inquisitor'),
+      bloodStatusLabel: document.querySelector('.blood-status'),
+      genderLabel: document.querySelector('.gender'),
+      detailsTags: document.querySelector('.tags')
     }
   }
 }
