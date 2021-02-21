@@ -1,4 +1,5 @@
 import { filterStudentsByTags, searchStudents, sortStudents } from './filtering.js'
+import { HOUSE_TYPES, BLOOD_TYPES } from './types.js'
 
 export const Controller = {
   students: [],
@@ -86,13 +87,13 @@ export const Controller = {
     )
 
     if (half && pure) {
-      return 'Half-Blood'
+      return BLOOD_TYPES.HALF_BLOOD
     } else if (half) {
-      return 'Half-Blood'
+      return BLOOD_TYPES.HALF_BLOOD
     } else if (pure) {
-      return 'Pure-Blood'
+      return BLOOD_TYPES.PURE_BLOOD
     } else {
-      return 'Muggle'
+      return BLOOD_TYPES.MUGGLE
     }
   },
 
@@ -129,7 +130,7 @@ export const Controller = {
   },
 
   canBeInquisitorialSquadMember(student) {
-    return student.house === 'Slytherin' || student.bloodStatus === 'Pure-Blood'
+    return student.house === HOUSE_TYPES.SLYTHERIN || student.bloodStatus === BLOOD_TYPES.PURE_BLOOD
   },
 
   canPrefectBeAdded(house) {
