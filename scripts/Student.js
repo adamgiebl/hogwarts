@@ -48,7 +48,7 @@ export const Student = {
     }`
   },
   set image({ firstName, lastName }) {
-    this._image = `./images/${lastName.toLowerCase()}_${firstName[0]}.png`
+    this._image = `./images/${lastName.toLowerCase()}_${firstName[0].toLowerCase()}.png`
   }
 }
 
