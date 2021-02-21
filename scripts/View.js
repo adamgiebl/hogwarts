@@ -82,10 +82,8 @@ export const View = {
     })
     const buttonExpel = this.elements.buttonExpel
     buttonExpel.addEventListener('click', () => {
-      this.Controller.setStudentStatus(
+      this.Controller.expelStudent(
         buttonExpel.dataset.studentid,
-        'isExpelled',
-        true,
         this.visuallyReflectStatusChange.bind(this)
       )
     })
@@ -95,7 +93,8 @@ export const View = {
       this.Controller.toggleStudentStatus(
         buttonExpel.dataset.studentid,
         'isPrefect',
-        this.visuallyReflectStatusChange.bind(this)
+        this.visuallyReflectStatusChange.bind(this),
+        buttonPrefect.textContent
       )
     })
 
@@ -104,7 +103,8 @@ export const View = {
       this.Controller.toggleStudentStatus(
         buttonExpel.dataset.studentid,
         'isInquisitor',
-        this.visuallyReflectStatusChange.bind(this)
+        this.visuallyReflectStatusChange.bind(this),
+        buttonInquisitor.textContent
       )
     })
   },

@@ -1,14 +1,19 @@
 import { filterStudentsByTags, searchStudents, sortStudents } from './filtering.js'
 import { HOUSE_TYPES, BLOOD_TYPES } from './types.js'
 
+import { Popup } from './Popup.js'
+
 export const Controller = {
   students: [],
   filteredStudents: [],
   View: null,
   Student: null,
+  Popup: null,
   async init(View, Student) {
     this.View = View
     this.Student = Student
+
+    this.Popup = Popup
 
     const GET_STUDENTS = 'https://petlatkea.dk/2021/hogwarts/students.json'
     const GET_FAMILIES = 'https://petlatkea.dk/2021/hogwarts/families.json'
@@ -16,15 +21,6 @@ export const Controller = {
     const familiesData = await this.fetchJSON(GET_FAMILIES)
 
     this.students = this.createStudents(studentsData, familiesData)
-
-    this.students[2].isPrefect = true
-    this.students[6].isPrefect = true
-    this.students[8].isPrefect = true
-    this.students[15].isPrefect = true
-    this.students[26].isPrefect = true
-    this.students[13].isPrefect = true
-    this.students[26].isInquisitor = true
-    this.students[13].isInquisitor = true
 
     this.View.init(this, this.students.length)
 
@@ -64,7 +60,6 @@ export const Controller = {
   },
 
   createStudents(studentsData, familiesData) {
-    console.log(familiesData)
     const students = []
     studentsData.forEach((studentJson, index) => {
       const student = Object.create(this.Student)
@@ -97,20 +92,30 @@ export const Controller = {
     }
   },
 
-  setStudentStatus(studentId, status, value, callback = () => {}) {
+  async expelStudent(studentId, callback = () => {}) {
     const student = this.students.find(student => student.id === studentId)
     if (!student) return console.error('Student not found')
-    student[status] = value
+    const res = await this.Popup.getConfirmation({
+      title: 'Do you want to expel this student?',
+      subTitle: 'This action is irreversible'
+    })
+    if (!res) return
+    console.log('User has confirmed the popup.')
+    student.isExpelled = true
     this.View.renderDetails(student)
-    callback(student.id, status, student[status])
+    callback(student.id, 'isExpelled', true)
   },
 
-  toggleStudentStatus(studentId, status, callback = () => {}) {
+  async toggleStudentStatus(studentId, status, callback = () => {}, buttonText) {
     const student = this.students.find(student => student.id === studentId)
 
     if (!student) return console.error('Student not found')
 
     if (status === 'isPrefect' && !student[status] && !this.canPrefectBeAdded(student.house)) {
+      this.Popup.getConfirmation({
+        title: "That won't work.",
+        subTitle: 'There are already two prefects in this house. Remove one first.'
+      })
       console.warn('Two prefects are already in this house.')
       return
     }
@@ -119,10 +124,20 @@ export const Controller = {
       !student[status] &&
       !this.canBeInquisitorialSquadMember(student)
     ) {
+      this.Popup.getConfirmation({
+        title: 'This student is not worthy.',
+        subTitle:
+          'Only Pure-Blooded students or students from Slytherin can be members of the Inquisitorial squad.'
+      })
       console.warn('This student is not worthy of the Inquisitorial squad.')
       return
     }
 
+    const res = await this.Popup.getConfirmation({
+      title: 'Change status of this student?',
+      subTitle: buttonText
+    })
+    if (!res) return
     student[status] = !student[status]
     console.log('Student status changed: ', { [status]: student[status] })
     this.View.renderDetails(student)

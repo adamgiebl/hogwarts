@@ -21,8 +21,13 @@
 
 .header-search {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-bottom: 30px;
+}
+.header-search span {
+  color: var(--lightGreyText);
+  font-size: 20px;
 }
 
 .search-wrapper {

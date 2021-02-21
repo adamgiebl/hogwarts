@@ -139,7 +139,7 @@ th {
 }
 
 .tag {
-  color: white;
+  color: var(--white);
   background: var(--slytherin);
   display: inline-block;
   padding: 5px 15px;
