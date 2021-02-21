@@ -113,11 +113,23 @@ export const Controller = {
       console.warn('Two prefects are already in this house.')
       return
     }
+    if (
+      status === 'isInquisitor' &&
+      !student[status] &&
+      !this.canBeInquisitorialSquadMember(student)
+    ) {
+      console.warn('This student is not worthy of the Inquisitorial squad.')
+      return
+    }
 
     student[status] = !student[status]
     console.log('Student status changed: ', { [status]: student[status] })
     this.View.renderDetails(student)
     callback(student.id, status, student[status])
+  },
+
+  canBeInquisitorialSquadMember(student) {
+    return student.house === 'Slytherin' || student.bloodStatus === 'Pure-Blood'
   },
 
   canPrefectBeAdded(house) {

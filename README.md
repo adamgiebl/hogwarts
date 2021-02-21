@@ -45,11 +45,11 @@ overview of the students in the current year, and sort, filter, and search for c
   - [x] nickname
   - [x] last name
   - [x] photo of student
-  - [ ] house crest and colors
+  - [x] house crest and colors
   - [x] blood-status
-  - [ ] if student is prefect
+  - [x] if student is prefect
   - [x] if student is expelled
-  - [ ] if student is member of the inquisitorial squad
+  - [x] if student is member of the inquisitorial squad
 - [ ] fix images for Patil
 - [ ] fix last name for Finch-Fletchley
 
@@ -64,7 +64,7 @@ overview of the students in the current year, and sort, filter, and search for c
 #### Prefects
 
 - [x] be able to make student a prefect
-- [ ] only two students from each house can be selected prefects (boy and a girl)
+- [x] only two students from each house can be selected prefects (boy and a girl)
 - [x] be able to revoke prefect status
 
 #### Blood status
@@ -72,7 +72,7 @@ overview of the students in the current year, and sort, filter, and search for c
 List of families:
 https://petlatkea.dk/2021/hogwarts/families.json
 
-- [ ] calculate blood status based on the list
+- [x] calculate blood status based on the list
 - blood status can be:
   - pure-blooded (pure-wizard)
   - half-blooded (hald-wizard)
@@ -83,4 +83,4 @@ https://petlatkea.dk/2021/hogwarts/families.json
 
 - [x] be able to appoint students to the inquisitorial squad, and remove them again
 - [x] any number of students can be appointed
-- [ ] only pure-blood or students from Slytherin may be appointed
+- [x] only pure-blood or students from Slytherin may be appointed
