@@ -12,7 +12,6 @@ export const View = {
 
   renderTable(students = []) {
     this.elements.tableBody.innerHTML = ''
-    if (students.length === 0) students = this.Controller.filteredStudents
     students.forEach((student, index) => {
       const tableRowClone = this.elements.tableRowTemplate.cloneNode(true)
       const dataCells = this.getDataCells(tableRowClone)
@@ -121,7 +120,7 @@ export const View = {
     const isExpelled = status === 'isExpelled'
     const animationName = isExpelled ? 'disappear' : 'anime'
     this.runAnimationOnce(studentRow, animationName, () => {
-      return isExpelled ? studentRow.remove() : this.Controller.refreshTable()
+      return isExpelled ? studentRow.remove() : null
     })
   },
 

@@ -15,7 +15,6 @@ export function filterStudentsByTags(students) {
   */
 
   const selectedTags = document.querySelectorAll('.tag--selected')
-  const includesExpelled = [...selectedTags].find(tag => tag.dataset.property === 'isExpelled')
   let filteredStudents = []
   if (selectedTags.length === 0) {
     return students
@@ -26,9 +25,6 @@ export function filterStudentsByTags(students) {
       const filterProperty = tag.dataset.property
       const filterValue = tag.dataset.value
       students.forEach(student => {
-        if (!includesExpelled && student.isExpelled) {
-          return
-        }
         if (typeof student[filterProperty] === 'boolean') {
           if (student[filterProperty]) {
             filteredStudents.push(student)
@@ -52,9 +48,6 @@ export function filterStudentsByTags(students) {
       const filterProperty = tag.dataset.property
       const filterValue = tag.dataset.value
       filteredStudents = filteredStudents.filter(student => {
-        if (!includesExpelled && student.isExpelled) {
-          return
-        }
         if (typeof student[filterProperty] === 'boolean') {
           if (student[filterProperty]) {
             return true
@@ -83,7 +76,9 @@ export function sortStudents(students, tableHeadCell, sortBy = null) {
   }
   return students.sort((a, b) => sortDescending(a, b, sortByKey))
 }
+
 export function searchStudents(students, searchTerm) {
+  if (!searchTerm) return students
   return students.filter(
     student =>
       student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||

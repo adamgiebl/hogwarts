@@ -7,15 +7,17 @@ export const Controller = {
   students: [],
   filteredStudents: [],
   expelledStudents: [],
+  filterOnlyExpelled: false,
   View: null,
   Student: null,
   Popup: null,
+  searchTerm: '',
   async init(View, Student) {
     this.View = View
     this.Student = Student
 
     this.Popup = Popup
-
+    window.APP = {}
     const GET_STUDENTS = 'https://petlatkea.dk/2021/hogwarts/students.json'
     const GET_FAMILIES = 'https://petlatkea.dk/2021/hogwarts/families.json'
     const studentsData = await this.fetchJSON(GET_STUDENTS)
@@ -27,32 +29,20 @@ export const Controller = {
 
     this.View.renderTable(this.students)
 
-    this.View.elements.filterHeadCells.forEach(tableHeadCell => {
-      tableHeadCell.addEventListener('click', () => {
-        this.filteredStudents =
-          this.filteredStudents.length === 0 ? this.students : this.filteredStudents
-        this.filteredStudents = sortStudents(this.filteredStudents, tableHeadCell)
-        this.View.renderTable(this.filteredStudents)
-      })
-    })
-    this.View.elements.searchInput.addEventListener('keyup', e => {
-      this.filteredStudents = searchStudents(this.students, e.target.value)
-      this.View.renderTable(this.filteredStudents)
-    })
+    this.filteredStudents = this.students
 
-    const filterTags = this.View.elements.filterTags
-    filterTags.forEach(filterTag => {
-      filterTag.addEventListener('click', () => {
-        const selected = !filterTag.classList.contains('tag--selected')
-        if (selected) filterTag.classList.add('tag--selected')
-        else filterTag.classList.remove('tag--selected')
-
-        this.filteredStudents = filterStudentsByTags(this.students)
-        this.View.renderTable(this.filteredStudents)
-      })
-    })
+    this.addEventListeners()
 
     this.View.renderDetails(this.students[3])
+  },
+
+  applyFilters() {
+    const students = this.filterOnlyExpelled ? this.expelledStudents : this.students
+
+    const searchedThrough = searchStudents(students, this.searchTerm)
+    const filteredByTags = filterStudentsByTags(searchedThrough)
+    this.filteredStudents = filteredByTags
+    this.View.renderTable(filteredByTags)
   },
 
   refreshTable() {
@@ -95,16 +85,48 @@ export const Controller = {
 
   async expelStudent(studentId, callback = () => {}) {
     const student = this.students.find(student => student.id === studentId)
+    const indexOfStudent = this.students.indexOf(student)
     if (!student) return console.error('Student not found')
+
     const res = await this.Popup.getConfirmation({
       title: 'Do you want to expel this student?',
       subTitle: 'This action is irreversible'
     })
     if (!res) return
-    console.log('User has confirmed the popup.')
+
+    this.expelledStudents.push(student)
+    this.students.splice(indexOfStudent, 1)
+    console.log('User has been removed from students.')
     student.isExpelled = true
     this.View.renderDetails(student)
     callback(student.id, 'isExpelled', true)
+  },
+
+  addEventListeners() {
+    this.View.elements.filterHeadCells.forEach(tableHeadCell => {
+      tableHeadCell.addEventListener('click', () => {
+        this.filteredStudents = sortStudents(this.filteredStudents, tableHeadCell)
+        this.View.renderTable(this.filteredStudents)
+      })
+    })
+    this.View.elements.searchInput.addEventListener('keyup', e => {
+      this.searchTerm = e.target.value
+      this.applyFilters(e.target.value)
+    })
+    const filterTags = this.View.elements.filterTags
+    filterTags.forEach(filterTag => {
+      filterTag.addEventListener('click', () => {
+        const selected = !filterTag.classList.contains('tag--selected')
+        if (selected) filterTag.classList.add('tag--selected')
+        else filterTag.classList.remove('tag--selected')
+
+        const tagIsExpelled = filterTag.dataset.property === 'isExpelled'
+        if (tagIsExpelled) {
+          this.filterOnlyExpelled = selected
+        }
+        this.applyFilters()
+      })
+    })
   },
 
   async toggleStudentStatus(studentId, status, callback = () => {}, buttonText) {
