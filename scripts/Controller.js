@@ -6,6 +6,7 @@ import { Popup } from './Popup.js'
 export const Controller = {
   students: [],
   filteredStudents: [],
+  expelledStudents: [],
   View: null,
   Student: null,
   Popup: null,

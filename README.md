@@ -59,7 +59,7 @@ overview of the students in the current year, and sort, filter, and search for c
 
 - [x] be able to expel a student, expelling removes a student from the list
 - [x] expelling cannot be revoked
-- [ ] expelling adds a student to a different list
+- [x] expelling adds a student to a different list
 
 #### Prefects
 

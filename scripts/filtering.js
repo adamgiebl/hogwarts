@@ -1,6 +1,21 @@
 export function filterStudentsByTags(students) {
-  // it works, don't touch it
+  // not optimized at all, but it works
+  /* 
+    The reason there are two iterations over the array is because 
+    once I need to add all the students to a list who have fulfil the inclusive filter and
+    then I need to filter them with the exlusive filters.
+    Inclusive meaning that if we choose Hufflepuff and Slytherin, it will show students from
+    both houses. Exclusive means that if we choose girls and boys, it will show no-one because
+    no student is boy and a girl at the same time.
+    This should allow for advanced searches like:
+    - girls from Slytherin and Hufflepuff
+    - boys from Gryffindor that are Expelled
+    - students from Hufflepuff that are Prefects
+  
+  */
+
   const selectedTags = document.querySelectorAll('.tag--selected')
+  const includesExpelled = [...selectedTags].find(tag => tag.dataset.property === 'isExpelled')
   let filteredStudents = []
   if (selectedTags.length === 0) {
     return students
@@ -11,6 +26,9 @@ export function filterStudentsByTags(students) {
       const filterProperty = tag.dataset.property
       const filterValue = tag.dataset.value
       students.forEach(student => {
+        if (!includesExpelled && student.isExpelled) {
+          return
+        }
         if (typeof student[filterProperty] === 'boolean') {
           if (student[filterProperty]) {
             filteredStudents.push(student)
@@ -24,14 +42,19 @@ export function filterStudentsByTags(students) {
     }
   })
 
+  // if inclusive filters didn't add anyone, we need to re-fill the array
   if (filteredStudents.length === 0) {
     filteredStudents = students
   }
+
   selectedTags.forEach(tag => {
     if (tag.dataset.type === 'exclusive') {
       const filterProperty = tag.dataset.property
       const filterValue = tag.dataset.value
       filteredStudents = filteredStudents.filter(student => {
+        if (!includesExpelled && student.isExpelled) {
+          return
+        }
         if (typeof student[filterProperty] === 'boolean') {
           if (student[filterProperty]) {
             return true
@@ -56,9 +79,9 @@ export function sortStudents(students, tableHeadCell, sortBy = null) {
 
   tableHeadCell.dataset.order = !order
   if (order) {
-    return students.sort((a, b) => sortDownUp(a, b, sortByKey))
+    return students.sort((a, b) => sortAscending(a, b, sortByKey))
   }
-  return students.sort((a, b) => sortUpDown(a, b, sortByKey))
+  return students.sort((a, b) => sortDescending(a, b, sortByKey))
 }
 export function searchStudents(students, searchTerm) {
   return students.filter(
@@ -68,7 +91,7 @@ export function searchStudents(students, searchTerm) {
   )
 }
 
-export function sortUpDown(a, b, sortBy) {
+export function sortDescending(a, b, sortBy) {
   if (a[sortBy] < b[sortBy]) {
     return -1
   }
@@ -78,7 +101,7 @@ export function sortUpDown(a, b, sortBy) {
   return 0
 }
 
-export function sortDownUp(a, b, sortBy) {
+export function sortAscending(a, b, sortBy) {
   if (a[sortBy] > b[sortBy]) {
     return -1
   }
