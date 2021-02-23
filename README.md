@@ -30,7 +30,7 @@ overview of the students in the current year, and sort, filter, and search for c
 
 #### List Interface
 
-- [ ] show number of students in each house
+- [x] show number of students in each house
 - [x] total number of students (not expelled)
 - [x] number of students expelled
 - [x] number of students currently displayed
@@ -50,8 +50,8 @@ overview of the students in the current year, and sort, filter, and search for c
   - [x] if student is prefect
   - [x] if student is expelled
   - [x] if student is member of the inquisitorial squad
-- [ ] fix images for Patil
-- [ ] fix last name for Finch-Fletchley
+- [x] fix images for Patil
+- [x] fix last name for Finch-Fletchley
 
 ### Functionality
 

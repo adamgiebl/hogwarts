@@ -113,7 +113,7 @@ th {
 }
 
 .anime {
-  animation: anime 0.3s ease-in-out;
+  animation: anime 0.1s ease-out;
 }
 
 @keyframes anime {
@@ -121,7 +121,7 @@ th {
     transform: translateX(0);
   }
   to {
-    transform: translateX(20px);
+    transform: translateX(10px);
   }
 }
 
@@ -142,7 +142,7 @@ th {
   color: var(--white);
   background: var(--slytherin);
   display: inline-block;
-  padding: 5px 15px;
+  padding: 7px 15px;
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
@@ -166,6 +166,18 @@ th {
   background: var(--gryffindor);
 }
 
+.tag--house {
+  padding: 0 15px 0 0;
+  overflow: hidden;
+}
+
+.tag__count {
+  padding: 7px 10px;
+  display: inline-block;
+  margin-right: 7px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .tag--prefect {
   background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(0,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%23c58000'/%3E%3Cstop offset='1' stop-color='%23c58000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='17' height='17' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='8.5' cy='8.5' r='8.5'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.19'/%3E%3C/svg%3E");
@@ -187,14 +199,14 @@ th {
 .tag--boy {
   background: var(--darkGrey);
   border: 2px solid var(--blue);
-  padding: 3px 13px;
+  padding: 5px 13px;
   color: var(--blue);
 }
 
 .tag--girl {
   background: var(--darkGrey);
   border: 2px solid var(--red);
-  padding: 3px 13px;
+  padding: 5px 13px;
   color: var(--red);
 }
 
@@ -202,12 +214,12 @@ th {
   background: var(--lightGrey);
   border: 2px solid var(--lightGreyText);
   color: var(--lightGreyText);
-  padding: 3px 13px;
+  padding: 5px 13px;
 }
 
 .tag--inquisitor {
   background: var(--black);
   border: 2px solid var(--brown);
   color: var(--brown);
-  padding: 3px 13px;
+  padding: 5px 13px;
 }

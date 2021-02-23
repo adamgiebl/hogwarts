@@ -8,6 +8,7 @@ export const View = {
     this.elements = this.runDOMQueries()
     this.totalStudentCount = totalStudentCount
     this.initDetails()
+    this.updateFilterTags()
   },
 
   renderTable(students = []) {
@@ -41,6 +42,17 @@ export const View = {
   updateCount(resultsCount) {
     this.elements.totalStudentCount.textContent = this.totalStudentCount
     this.elements.resultsCount.textContent = resultsCount
+  },
+
+  updateFilterTags() {
+    this.elements.filterTags.forEach(tag => {
+      if (tag.dataset.property === 'house') {
+        const filteredByHouse = this.Controller.students.filter(
+          stud => stud.house.toLowerCase() === tag.dataset.value.toLowerCase()
+        )
+        tag.children[0].textContent = filteredByHouse.length
+      }
+    })
   },
 
   renderDetails(student) {
@@ -120,7 +132,7 @@ export const View = {
     const isExpelled = status === 'isExpelled'
     const animationName = isExpelled ? 'disappear' : 'anime'
     this.runAnimationOnce(studentRow, animationName, () => {
-      return isExpelled ? studentRow.remove() : null
+      isExpelled ? studentRow.remove() : null
     })
   },
 

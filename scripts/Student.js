@@ -12,6 +12,7 @@ export const Student = {
   isPrefect: false,
   isExpelled: false,
   isInquisitor: false,
+  hasCommonLastName: false,
   set name(rawFullName) {
     rawFullName = rawFullName.trim()
     const firstSpaceIndex = rawFullName.indexOf(' ')
@@ -41,7 +42,6 @@ export const Student = {
     this.lastName = lastNameWithHyphen ? lastNameWithHyphen : capitalize(lastName)
     this.nickname = capitalize(nickname)
     this.middleName = middleName.includes('"') ? '' : capitalize(middleName)
-    this.image = { firstName: this.firstName, lastName: this.lastName }
   },
   set house(rawHouse) {
     this._house = capitalize(rawHouse.trim())
@@ -61,7 +61,9 @@ export const Student = {
     }`
   },
   set image({ firstName, lastName }) {
-    this._image = `./images/${lastName.toLowerCase()}_${firstName[0].toLowerCase()}.png`
+    this._image = `./images/${lastName.toLowerCase()}_${
+      this.hasCommonLastName ? firstName.toLowerCase() : firstName[0].toLowerCase()
+    }.png`
   }
 }
 

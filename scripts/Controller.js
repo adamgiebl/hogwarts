@@ -45,13 +45,10 @@ export const Controller = {
     this.View.renderTable(filteredByTags)
   },
 
-  refreshTable() {
-    this.filteredStudents = filterStudentsByTags(this.students)
-    this.View.renderTable(this.filteredStudents)
-  },
-
   createStudents(studentsData, familiesData) {
     const students = []
+    const lastNames = []
+    const commonLastNames = []
     studentsData.forEach((studentJson, index) => {
       const student = Object.create(this.Student)
       student.id = index.toString()
@@ -59,9 +56,33 @@ export const Controller = {
       student.house = studentJson.house
       student.gender = studentJson.gender
       student.bloodStatus = this.determineBloodStatus(student.lastName, familiesData)
+      if (lastNames.includes(student.lastName)) commonLastNames.push(student.lastName)
+      lastNames.push(student.lastName)
+
       students.push(student)
     })
+
+    this.setImageSources(students, commonLastNames)
+
     return students
+  },
+
+  setImageSources(students, commonLastNames) {
+    students.forEach(student => {
+      if (commonLastNames.includes(student.lastName)) {
+        student.hasCommonLastName = true
+      }
+      const indexOfHyphen = student.lastName.indexOf('-')
+      if (indexOfHyphen != -1) {
+        student.image = {
+          firstName: student.firstName,
+          lastName: student.lastName.substring(indexOfHyphen + 1)
+        }
+        return
+      }
+
+      student.image = { firstName: student.firstName, lastName: student.lastName }
+    })
   },
 
   determineBloodStatus(lastName, families) {
@@ -99,6 +120,7 @@ export const Controller = {
     console.log('User has been removed from students.')
     student.isExpelled = true
     this.View.renderDetails(student)
+    this.View.updateFilterTags()
     callback(student.id, 'isExpelled', true)
   },
 
@@ -111,7 +133,7 @@ export const Controller = {
     })
     this.View.elements.searchInput.addEventListener('keyup', e => {
       this.searchTerm = e.target.value
-      this.applyFilters(e.target.value)
+      this.applyFilters(this.searchTerm)
     })
     const filterTags = this.View.elements.filterTags
     filterTags.forEach(filterTag => {
