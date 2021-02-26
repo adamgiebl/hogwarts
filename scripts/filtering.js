@@ -8,8 +8,8 @@ export function filterStudentsByTags(students) {
     both houses. Exclusive means that if we choose girls and boys, it will show no-one because
     no student is boy and a girl at the same time.
     This should allow for advanced searches like:
-    - girls from Slytherin and Hufflepuff
-    - boys from Gryffindor that are Expelled
+    - only girls from Slytherin and Hufflepuff
+    - only boys from Gryffindor that are Expelled
     - students from Hufflepuff that are Prefects
   
   */

@@ -68,6 +68,7 @@
   border: 3px solid var(--lightGreyText);
   border-radius: 5px;
   color: var(--lightGrey);
+  transition: all 500ms;
 }
 
 .popup__buttons .popup__confirm:hover {

@@ -10,9 +10,12 @@ export const Popup = {
     this.element = this.createPopup(config)
     document.body.appendChild(this.element)
   },
-  getConfirmation: async function (config) {
+  getConfirmation: async function (config, hacked = false) {
     return new Promise((resolve, reject) => {
       this.appendPopup(config)
+      if (hacked) {
+        this.flyingButton()
+      }
       this.element.addEventListener('click', e => {
         if (e.target === this.element) {
           this.element.classList.add('hidden')
@@ -21,12 +24,22 @@ export const Popup = {
       })
       this.element.querySelector('.popup__confirm').addEventListener('click', e => {
         this.element.classList.add('hidden')
-        resolve(true)
+        hacked ? resolve(false) : resolve(true)
       })
       this.element.querySelector('.popup__cancel').addEventListener('click', e => {
         this.element.classList.add('hidden')
         resolve(false)
       })
+    })
+  },
+  flyingButton: function () {
+    const button = document.querySelector('.popup__confirm')
+    button.addEventListener('mouseover', () => {
+      const randomX = Math.floor(Math.random() * 200)
+      const randomY = Math.floor(Math.random() * 200)
+      button.style.transform = `translate(${
+        (button.offsetLeft + randomX) * (Math.random() < 0.5 ? -1 : 1)
+      }px, ${(button.offsetTop + randomY) * (Math.random() < 0.5 ? -1 : 1)}px)`
     })
   },
   createPopup: function ({ title, subTitle }) {

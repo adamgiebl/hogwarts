@@ -167,12 +167,3 @@
 .tags .tag {
   animation: appear 0.5s ease-in-out;
 }
-
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}

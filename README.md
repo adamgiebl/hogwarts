@@ -84,3 +84,15 @@ https://petlatkea.dk/2021/hogwarts/families.json
 - [x] be able to appoint students to the inquisitorial squad, and remove them again
 - [x] any number of students can be appointed
 - [x] only pure-blood or students from Slytherin may be appointed
+
+#### Hacking
+
+- [x] create hackTheSystem() that activates the hack mode
+- [x] you will be injected with your own name into the list of students
+- [x] you cannot be expelled
+- [x] former pure-bloods will get completely
+      random blood-status, whereas half-bloods and muggle-bloods will be listed as pure-blood.
+      If you can randomly modify the former pure-bloods on every redisplay (sort or filter)
+      of the list, the better!
+- [x] Adding a student to the inquisitorial squad will only work for a limited time, before
+      the student is automatically removed again

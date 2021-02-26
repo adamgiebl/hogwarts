@@ -64,3 +64,56 @@ input[type='text']::placeholder {
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 3px solid var(--grey); /* creates padding around scroll thumb */
 }
+
+.appear {
+  animation: appear 0.5s ease-in-out;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.anime {
+  animation: anime 0.1s ease-out;
+}
+
+@keyframes anime {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(10px);
+  }
+}
+
+body .app .disappear {
+  animation: disappear 1s ease-in-out;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+body .app .jumpout {
+  animation: jumpout 0.7s cubic-bezier(0.65, -0.37, 0.435, 1.055);
+  z-index: 1000;
+}
+
+@keyframes jumpout {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}

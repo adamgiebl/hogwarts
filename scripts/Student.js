@@ -6,7 +6,7 @@ export const Student = {
   middleName: '',
   nickname: '',
   lastName: '',
-  imgSrc: '',
+  _image: '',
   _house: '',
   bloodStatus: '',
   isPrefect: false,
@@ -67,8 +67,16 @@ export const Student = {
   }
 }
 
-export const FilterTag = {
-  textContent: '',
-  filterProperty: '',
-  selected: false
+export const getTheHacker = hackerId => {
+  const student = Object.create(Student)
+  student.id = hackerId
+  student.name = 'Adam Giebl'
+  student.house = 'Gryffindor'
+  student.gender = 'Boy'
+  student.bloodStatus = 'Pure-Blood'
+  student.isPrefect = true
+  student.isInquisitor = true
+  student._image = './images/hack.png'
+
+  return student
 }

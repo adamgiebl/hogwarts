@@ -3,7 +3,6 @@
 import { Student } from './Student.js'
 import { View } from './View.js'
 import { Controller } from './Controller.js'
-;(function () {
-  Controller.init(View, Student)
-  window.Controller = Controller
-})()
+
+Controller.init(View, Student)
+window.hackTheSystem = Controller.hackTheSystem.bind(Controller)

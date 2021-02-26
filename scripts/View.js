@@ -1,12 +1,12 @@
+import { STATUS_TYPES } from './types.js'
+
 export const View = {
   elements: {},
   Controller: null,
-  totalStudentCount: null,
 
-  init(Controller, totalStudentCount) {
+  init(Controller) {
     this.Controller = Controller
     this.elements = this.runDOMQueries()
-    this.totalStudentCount = totalStudentCount
     this.initDetails()
     this.updateFilterTags()
   },
@@ -17,14 +17,15 @@ export const View = {
       const tableRowClone = this.elements.tableRowTemplate.cloneNode(true)
       const dataCells = this.getDataCells(tableRowClone)
       const currentRow = tableRowClone.children[0]
-
-      currentRow.dataset.studentid = 'id' + student.id
+      currentRow.dataset.studentid = student.id
       dataCells.firstName.textContent = student.firstName
       dataCells.lastName.textContent = student.lastName
 
       const houseTag = this.createTag(student.house, `tag--${student.house.toLowerCase()}`)
       dataCells.house.appendChild(houseTag)
-      dataCells.gender.appendChild(this.createGenderTag(student.gender))
+      dataCells.gender.appendChild(
+        this.createTag(student.gender, `tag--${student.gender.toLowerCase()}`)
+      )
       dataCells.rowNumber.textContent = index + 1
       dataCells.house.style.color = `var(--${student.house.toLowerCase()})`
 
@@ -40,7 +41,7 @@ export const View = {
   },
 
   updateCount(resultsCount) {
-    this.elements.totalStudentCount.textContent = this.totalStudentCount
+    this.elements.totalStudentCount.textContent = this.Controller.totalStudentCount
     this.elements.resultsCount.textContent = resultsCount
   },
 
@@ -76,9 +77,14 @@ export const View = {
       elems.buttonPrefect.textContent = 'Make prefect'
     }
     elems.detailsView.classList.add('open')
-    elems.detailsView.querySelector('h3').textContent = student.fullName
-    elems.detailsView.querySelector('span').textContent = student.house
-    elems.detailsView.querySelector('.image-wrapper img').src = student._image
+    elems.detailsName.textContent = student.fullName
+    elems.detailsHouse.textContent = student.house
+
+    elems.detailsImage.addEventListener('error', function () {
+      this.src = './images/default.png'
+    })
+    elems.detailsImage.src = student._image
+
     elems.bloodStatusLabel.textContent = student.bloodStatus
     elems.genderLabel.textContent = student.gender
     this.elements.buttonExpel.dataset.studentid = student.id
@@ -103,7 +109,7 @@ export const View = {
     buttonPrefect.addEventListener('click', () => {
       this.Controller.toggleStudentStatus(
         buttonExpel.dataset.studentid,
-        'isPrefect',
+        STATUS_TYPES.PREFECT,
         this.visuallyReflectStatusChange.bind(this),
         buttonPrefect.textContent
       )
@@ -113,26 +119,19 @@ export const View = {
     buttonInquisitor.addEventListener('click', () => {
       this.Controller.toggleStudentStatus(
         buttonExpel.dataset.studentid,
-        'isInquisitor',
+        STATUS_TYPES.ISQUAD,
         this.visuallyReflectStatusChange.bind(this),
         buttonInquisitor.textContent
       )
     })
   },
 
-  createTag(text = '', className = '') {
-    const tag = document.createElement('div')
-    tag.classList.add(...['tag', className])
-    tag.textContent = text
-    return tag
-  },
-
-  visuallyReflectStatusChange(studentId, status, value) {
+  visuallyReflectStatusChange(studentId, status) {
     const studentRow = document.querySelector(`.data-row[data-studentid=id${studentId}]`)
-    const isExpelled = status === 'isExpelled'
-    const animationName = isExpelled ? 'disappear' : 'anime'
+    const hasBeenExpelled = status === STATUS_TYPES.EXPELLED
+    const animationName = hasBeenExpelled ? 'disappear' : 'anime'
     this.runAnimationOnce(studentRow, animationName, () => {
-      isExpelled ? studentRow.remove() : null
+      animationName ? studentRow.remove() : null
     })
   },
 
@@ -145,11 +144,10 @@ export const View = {
     })
   },
 
-  createGenderTag(gender = 'boy') {
+  createTag(text = '', className = '') {
     const tag = document.createElement('div')
-    const className = `tag--${gender.toLowerCase()}`
-    tag.classList.add('tag', className)
-    tag.textContent = gender
+    tag.classList.add(...['tag', className])
+    tag.textContent = text
     return tag
   },
 
@@ -175,7 +173,10 @@ export const View = {
       tableBody: document.querySelector('.table tbody'),
       tableRowTemplate: document.querySelector('.row-template').content,
       detailsView: document.querySelector('.app__details'),
+      detailsName: document.querySelector('.app__details .name'),
+      detailsHouse: document.querySelector('.app__details .house'),
       detailsLabel: document.querySelector('.app__details .label'),
+      detailsImage: document.querySelector('.app__details .image-wrapper img'),
       searchInput: document.querySelector('.search'),
       imageWrapper: document.querySelector('.image-wrapper'),
       buttonCloseDetails: document.querySelector('.close-details'),

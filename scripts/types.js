@@ -10,3 +10,9 @@ export const BLOOD_TYPES = {
   HALF_BLOOD: 'Half-Blood',
   MUGGLE: 'Muggle'
 }
+
+export const STATUS_TYPES = {
+  EXPELLED: 'isExpelled',
+  ISQUAD: 'isInquisitor',
+  PREFECT: 'isPrefect'
+}
