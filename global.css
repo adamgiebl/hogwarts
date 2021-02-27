@@ -24,12 +24,36 @@
   --accentColor: ghostwhite;
   --white: ghostwhite;
   --brown: #cb8d1a;
+  --verticalMargin: 10vh;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--greyText);
   background: var(--black);
+  background-color: #181818;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  transition: all 3s ease-in-out;
+  padding-top: calc(var(--verticalMargin) / 2);
+  overflow: hidden;
+}
+
+body.ravenclaw {
+  background: radial-gradient(rgb(2 127 222 / 37%) -232%, black);
+}
+
+body.hufflepuff {
+  background: radial-gradient(rgb(255 199 63 / 38%) -232%, black);
+}
+
+body.slytherin {
+  background: radial-gradient(rgb(75 142 118 / 64%) -232%, black);
+}
+
+body.gryffindor {
+  background: radial-gradient(rgb(189 52 52 / 58%) -232%, black);
 }
 
 h1 {

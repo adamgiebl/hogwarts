@@ -71,7 +71,7 @@ export const getTheHacker = hackerId => {
   const student = Object.create(Student)
   student.id = hackerId
   student.name = 'Adam Giebl'
-  student.house = 'Gryffindor'
+  student.house = 'Ravenclaw'
   student.gender = 'Boy'
   student.bloodStatus = 'Pure-Blood'
   student.isPrefect = true

@@ -152,6 +152,8 @@ export const View = {
   },
 
   applyHouseTheme(house) {
+    document.body.className = ''
+    document.body.classList.add(house.toLowerCase())
     this.elements.detailsView.className = 'app__details open'
     this.elements.detailsView.classList.add(house.toLowerCase())
     this.elements.detailsLabel.style.background = `var(--${house.toLowerCase()})`
@@ -189,7 +191,8 @@ export const View = {
       buttonInquisitor: document.querySelector('.button--inquisitor'),
       bloodStatusLabel: document.querySelector('.blood-status'),
       genderLabel: document.querySelector('.gender'),
-      detailsTags: document.querySelector('.tags')
+      detailsTags: document.querySelector('.tags'),
+      app: document.querySelector('.app')
     }
   }
 }
