@@ -78,8 +78,8 @@ export const Controller = {
 
   isEpxelledFilterSelected() {
     const selectedTags = [...document.querySelectorAll('.tag--selected')]
-    const expelledTag = selectedTags.find(tag => tag.dataset.property === STATUS_TYPES.EXPELLED)
-    return !!expelledTag
+    const expelledTag = selectedTags.some(tag => tag.dataset.property === STATUS_TYPES.EXPELLED)
+    return expelledTag
   },
 
   setImageSources(students, commonLastNames) {
