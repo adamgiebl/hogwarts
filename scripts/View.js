@@ -1,4 +1,4 @@
-import { STATUS_TYPES } from './types.js'
+import { HOUSE_TYPES, STATUS_TYPES } from './types.js'
 
 export const View = {
   elements: {},
@@ -88,7 +88,7 @@ export const View = {
     elems.bloodStatusLabel.textContent = student.bloodStatus
     elems.genderLabel.textContent = student.gender
     this.elements.buttonExpel.dataset.studentid = student.id
-    this.applyHouseColors(student.house)
+    this.applyHouseTheme(student.house)
   },
 
   initDetails() {
@@ -151,7 +151,9 @@ export const View = {
     return tag
   },
 
-  applyHouseColors(house) {
+  applyHouseTheme(house) {
+    this.elements.detailsView.className = 'app__details open'
+    this.elements.detailsView.classList.add(house.toLowerCase())
     this.elements.detailsLabel.style.background = `var(--${house.toLowerCase()})`
     this.elements.imageWrapper.style.background = `var(--${house.toLowerCase()})`
   },

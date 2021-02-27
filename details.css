@@ -12,6 +12,27 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
+
+  background-repeat: no-repeat;
+  background-position: bottom -50px right -50px;
+  background-size: 90%;
+  background-blend-mode: overlay;
+}
+
+.app__details.ravenclaw {
+  background-image: url(./icons/Ravenclaw.svg);
+}
+.app__details.hufflepuff {
+  background-image: url(./icons/Hufflepuff.svg);
+}
+.app__details.gryffindor {
+  background-size: 70%;
+  background-image: url(./icons/Gryffindor.svg);
+}
+.app__details.slytherin {
+  background-size: 70%;
+  background-position: bottom -80px right -20px;
+  background-image: url(./icons/Slytherin.svg);
 }
 
 .app__details.expelled .image-wrapper {
