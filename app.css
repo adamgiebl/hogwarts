@@ -88,6 +88,11 @@
   mix-blend-mode: soft-light;
 }
 
+.filter-wrapper .tag--prefect img {
+  mix-blend-mode: unset;
+  filter: invert(1);
+}
+
 .filter-wrapper .tag--inquisitor img,
 .filter-wrapper .tag--boy img,
 .filter-wrapper .tag--girl img,

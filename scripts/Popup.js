@@ -1,5 +1,6 @@
 export const Popup = {
   element: null,
+  audio: new Audio('./icons/whoosh.mp3'),
   OUTCOMES: {
     CONFIRM: 'confirm',
     CANCEL: 'cancel'
@@ -40,6 +41,7 @@ export const Popup = {
       button.style.transform = `translate(${
         (button.offsetLeft + randomX) * (Math.random() < 0.5 ? -1 : 1)
       }px, ${(button.offsetTop + randomY) * (Math.random() < 0.5 ? -1 : 1)}px)`
+      this.audio.play()
     })
   },
   createPopup: function ({ title, subTitle }) {

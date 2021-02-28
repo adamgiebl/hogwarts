@@ -38,7 +38,7 @@ export const Controller = {
 
     this.addEventListeners()
 
-    this.View.renderDetails(this.students[3])
+    //this.View.renderDetails(this.students[3])
   },
 
   applyFilters() {
@@ -248,12 +248,21 @@ export const Controller = {
   },
 
   hackTheSystem() {
+    const audio = new Audio('./icons/voice.mp3')
+    audio.volume = 0.8
     if (this.hasBeenHacked) return
     this.hasBeenHacked = true
+
+    audio.play()
     this.hackerId = 'XXX42069'
     const student = getTheHacker(this.hackerId)
     this.students.unshift(student)
+
     this.View.updateFilterTags()
     this.applyFilters()
+    return console.log(
+      '%cHacking mode activated, strange things might happen...',
+      'color:limegreen; font-size: 22px; background: black; padding: 15px;'
+    )
   }
 }
