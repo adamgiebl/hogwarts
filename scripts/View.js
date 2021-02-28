@@ -27,7 +27,6 @@ export const View = {
         this.createTag(student.gender, `tag--${student.gender.toLowerCase()}`)
       )
       dataCells.rowNumber.textContent = index + 1
-      dataCells.house.style.color = `var(--${student.house.toLowerCase()})`
 
       currentRow.addEventListener('click', () => {
         this.runAnimationOnce(currentRow, 'anime')
@@ -76,7 +75,6 @@ export const View = {
     } else {
       elems.buttonPrefect.textContent = 'Make prefect'
     }
-    elems.detailsView.classList.add('open')
     elems.detailsName.textContent = student.fullName
     elems.detailsHouse.textContent = student.house
 
@@ -89,6 +87,8 @@ export const View = {
     elems.genderLabel.textContent = student.gender
     this.elements.buttonExpel.dataset.studentid = student.id
     this.applyHouseTheme(student.house)
+
+    elems.detailsView.classList.add('open')
   },
 
   initDetails() {

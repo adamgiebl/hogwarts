@@ -37,8 +37,6 @@ export const Controller = {
     this.filteredStudents = this.students
 
     this.addEventListeners()
-
-    //this.View.renderDetails(this.students[3])
   },
 
   applyFilters() {
